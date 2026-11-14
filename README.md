@@ -1,50 +1,62 @@
-# Welcome to your Expo app 👋
+<p align="center">
+  <img src="assets/images/icon.png" alt="StickerSmash logo" width="88" height="88" />
+</p>
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+<h1 align="center">StickerSmash</h1>
 
-## Get started
+<p align="center">
+  Expo and React Native app for picking a photo from your library.<br />
+  Pick a photo and it appears on the Home screen, with Reset, add and Save controls.
+</p>
 
-1. Install dependencies
+<p align="center">
+  <a href="#running-it">Run it</a>
+  ·
+  <a href="https://docs.expo.dev/">Expo docs</a>
+</p>
 
-   ```bash
-   npm install
-   ```
+StickerSmash is a small Expo and React Native app with one working screen. Pick a photo from your library and it appears in a rounded frame, with Reset, add and Save buttons below it. The add and Save buttons do nothing yet, and the About tab only shows placeholder text.
 
-2. Start the app
+It runs on Android, iOS and the web from one TypeScript codebase. There is no backend, account or API key. You need Node.js and npm, plus an emulator, simulator or device for the native targets.
 
-   ```bash
-   npx expo start
-   ```
+## What you get
 
-In the output, you'll find options to open the app in a
+- **Photos from your library.** `Choose a photo` opens the system picker through `expo-image-picker`. The crop screen is on through `allowsEditing`, and the photo is kept at full quality with `quality: 1`. If you cancel, the app shows an alert that no image was selected.
+- **Two states on one screen.** A `showAppOptions` flag in `app/(tabs)/index.tsx` swaps the footer. Picking a photo, or pressing `Use this photo`, replaces the two buttons with a row of Reset, add and Save. Reset brings the footer back, so you can pick another photo.
+- **A bundled placeholder.** Until you pick a photo, `ImageViewer` shows `assets/images/background-image.png`. `Use this photo` shows the controls on that placeholder without opening the picker.
+- **Tabs from the file tree.** Expo Router maps `app/(tabs)/index.tsx` to Home and `app/(tabs)/about.tsx` to About. Unknown routes render `app/+not-found.tsx`, which links back to Home.
+- **Four small components.** `Button`, `CircleButton`, `IconButton` and `ImageViewer` live in `components/`. `Button` has a `primary` theme with a yellow border and a picture icon.
+- **Typed routes and the React Compiler.** `app.json` turns on `typedRoutes`, which type checks `Link` hrefs, and `reactCompiler`. It also sets `newArchEnabled`, so the app uses the New Architecture.
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## Running it
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+Install the dependencies once:
 
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+```sh
+npm install
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+Then open the app on a target:
 
-## Learn more
+| Target | Command | You need |
+| --- | --- | --- |
+| **Android** | `npm run android` | An Android emulator, or a device connected to your machine |
+| **iOS** | `npm run ios` | A Mac with Xcode and the iOS simulator |
+| **Web** | `npm run web` | A browser |
 
-To learn more about developing your project with Expo, look at the following resources:
+`npm start` runs the Expo dev server without picking a target. Its output lists the other ways to open the app, including Expo Go and development builds.
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+### Lint
 
-## Join the community
+```sh
+npm run lint
+```
 
-Join our community of developers creating universal apps.
+This runs `expo lint` with the ESLint config in `eslint.config.js`.
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## Project layout
+
+- `app/` holds the routes. `app/_layout.tsx` is the root stack, and `app/(tabs)/` holds the two tab screens.
+- `components/` holds the shared buttons and the photo frame.
+- `assets/images/` holds the app icon, the placeholder photo, and the splash and Android icon art.
+- `app.json` holds the Expo config, including the `stickersmash` URL scheme.
