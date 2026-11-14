@@ -60,3 +60,7 @@ This runs `expo lint` with the ESLint config in `eslint.config.js`.
 - `components/` holds the shared buttons and the photo frame.
 - `assets/images/` holds the app icon, the placeholder photo, and the splash and Android icon art.
 - `app.json` holds the Expo config, including the `stickersmash` URL scheme.
+
+## License
+
+MIT. See [LICENSE](LICENSE).
